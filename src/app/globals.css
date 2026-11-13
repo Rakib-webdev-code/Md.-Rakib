@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #faf9f6; --fg: #141414; --muted: #66666c;
+  --line: #e4e2dc; --card: #ffffff; --accent: #a85f00;
+}
+.dark {
+  --bg: #0b0b0c; --fg: #ededed; --muted: #8a8a8f;
+  --line: #242427; --card: #121214; --accent: #f5a524;
+}
+@theme inline {
+  --color-bg: var(--bg); --color-fg: var(--fg); --color-muted: var(--muted);
+  --color-line: var(--line); --color-card: var(--card); --color-accent: var(--accent);
+  --font-sans: var(--f-sans); --font-serif: var(--f-serif);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-sans), system-ui, sans-serif; transition: background-color .3s, color .3s; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@keyframes spin-angle { to { --angle: 360deg; } }
+.glow { position: relative; }
+.glow::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 2px; pointer-events: none;
+  background: conic-gradient(from var(--angle), transparent 0 50%, var(--accent), #ff6b81, #7c5cff, var(--accent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0; transition: opacity .35s; animation: spin-angle 3s linear infinite;
+}
+.glow::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: 0 0 36px -10px var(--accent); opacity: 0; transition: opacity .4s;
+}
+.glow:hover::before { opacity: 1; }
+.glow:hover::after { opacity: .7; }
+@media (prefers-reduced-motion: reduce) { .glow::before { animation: none; } }
