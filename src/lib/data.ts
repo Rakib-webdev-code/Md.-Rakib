@@ -8,7 +8,7 @@ export const profile = {
   github: "https://github.com/Rakib-webdev-code",
   linkedin: "https://www.linkedin.com/in/md-rakib-dv/",
   x: "https://x.com/IslamTamim5867",
-  resume: "https://drive.google.com/file/d/1Xxmc-xHK-TxdJkKtpqdJgv8oK0Oioyad/view?usp=sharing",
+  resume: "https://drive.google.com/file/d/1V0rBp8mLGcmBN7vUkIK2rd5_CFh1N-ev/view?usp=sharing",
 };
 
 export const projects = [
